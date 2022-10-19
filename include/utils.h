@@ -13,6 +13,7 @@ typedef struct Vector {
 
 
 float euclideanDistance(vector a, vector b);
+vector centroidCalculator(vector * points, int size);
 
 
 #endif
