@@ -1,11 +1,16 @@
-
-
 #ifndef UTILS
 #define UTILS
 
-typedef struct vector;
+
+#include <stdio.h>
+#include <stdlib.h>
 
 
-void inicializa();
+typedef struct Vector {       
+    float x;
+    float y;
+} vector;
+
+
 
 #endif

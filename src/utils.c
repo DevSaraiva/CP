@@ -1,11 +1,5 @@
-#include "utils.h"
+#include "../include/utils.h"
 
-struct vector{       
-    float x;
-    float y;
-};
-
-
-void inicializa(){
-    printf("0la");
+void teste(){
+    printf("ola");
 }
