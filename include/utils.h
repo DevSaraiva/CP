@@ -12,5 +12,7 @@ typedef struct Vector {
 } vector;
 
 
+float euclideanDistance(vector a, vector b);
+
 
 #endif

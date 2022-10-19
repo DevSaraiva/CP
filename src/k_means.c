@@ -37,7 +37,10 @@ int main(){
 
     alloc();
     init();
-    printf("ola");
+   
+   
+
+   
 
 
 
