@@ -77,9 +77,10 @@ int main(){
    printList(a);
 
 
-   deleteL(a->next,a);
+   deleteL(&(a));
 
-      printList(a);
+printf("\n");
+    printList(a);
 
 
 

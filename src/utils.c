@@ -28,17 +28,11 @@ vector centroidCalculator(vector * points, int size){
 }
 
 
-// da free a cabeca do l e mete o ant->prox a apontar para l->prox
-void deleteL (llist l, llist prev){
-    if(prev){
-        prev->next = l->next;
-        free(l);
-    }else{
-        llist aux = l;
-        l = l->next;
-        free(aux);
-    }
-    
+// da delete a cabeca do l
+void deleteL (llist *l){
+    llist temp = (*l);
+	(*l) = (*l)->next;
+	free(temp);
 }
 
 // adiciona à cabeça da lista
