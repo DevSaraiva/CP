@@ -7,7 +7,7 @@
 
 vector * points;
 vector * clusters;
-
+lligada * cluster_points;
 
 void alloc(){
     points = (vector *) malloc(sizeof(vector) * N);
@@ -28,9 +28,30 @@ void init(){
         clusters[i].x = points[i].x;
         clusters[i].y = points[i].y;
     }
+    
 
 }
 
+void assignsCluster () {
+    for(int i = 0; i < N; i++) {
+
+        int ind_cluster_prox = 0;
+        float distance_m_prox = euclideanDistance(points[i],clusters[0]);
+        float distance_aux;
+        for (int j=1; j < K; j++){
+            distance_aux = euclideanDistance(points[i],clusters[j]);
+            if (distance_aux < distance_m_prox) {
+                distance_m_prox = distance_aux;
+                ind_cluster_prox = j
+            }
+        }
+        // aqui temos o indice do cluster mais proximo do ponto
+
+     
+        // t
+       
+    }
+}
 
 
 int main(){
