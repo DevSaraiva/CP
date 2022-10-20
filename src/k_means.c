@@ -90,14 +90,15 @@ int main(){
 
         changed = recalculateClusters();
         assignsCluster();
-        printf("ola\n");
         i++;
+        printf("%d\n",i);
+      
 
     }
 
-    printf("%d",i);
-    
 
+    
+    return 1;
 
     // for(int i = 0; i < K; i++){
     //     printList(cluster_points[i]);
