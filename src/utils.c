@@ -26,3 +26,11 @@ vector centroidCalculator(vector * points, int size){
 
     return res;
 }
+
+
+// da free a cabeça e devolve a cauda
+void deleteHead (lligada l){
+    lligada aux = l;
+    l = l->prox;
+    free(aux);
+}

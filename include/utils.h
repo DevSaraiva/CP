@@ -20,6 +20,6 @@ typedef struct Lligada {
 
 float euclideanDistance(vector a, vector b);
 vector centroidCalculator(vector * points, int size);
-
+void deleteHead (lligada l);
 
 #endif
