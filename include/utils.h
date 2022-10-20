@@ -18,7 +18,7 @@ typedef struct Llist {
 } *llist;
 
 float euclideanDistance(vector a, vector b);
-vector centroidCalculator(vector * points, int size);
+vector centroidCalculator(llist points);
 void deleteL (llist *l);
 void appendL(llist *l, vector value);
 void printList(llist l);

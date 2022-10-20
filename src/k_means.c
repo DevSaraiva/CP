@@ -12,6 +12,7 @@ llist * cluster_points;
 void alloc(){
     points = (vector *) malloc(sizeof(vector) * N);
     clusters = (vector *) malloc(sizeof(vector) * K);
+    cluster_points = (llist *) malloc(sizeof(struct Llist) * K);
 }
 
 
@@ -35,58 +36,72 @@ void init(){
 void assignsCluster () {
     for(int i = 0; i < N; i++) {
 
-        int ind_cluster_prox = 0;
-        float distance_m_prox = euclideanDistance(points[i],clusters[0]);
+        int id_cluster = 0;
+        float distance_near = euclideanDistance(points[i],clusters[0]);
         float distance_aux;
         for (int j=1; j < K; j++){
             distance_aux = euclideanDistance(points[i],clusters[j]);
-            if (distance_aux < distance_m_prox) {
-                distance_m_prox = distance_aux;
-                ind_cluster_prox = j;
+            if (distance_aux < distance_near) {
+                distance_near = distance_aux;
+                id_cluster = j;
             }
         }
+
         // aqui temos o indice do cluster mais proximo do ponto
 
-     
-        // t
-       
+        appendL(&cluster_points[id_cluster],points[i]);
     }
 }
+
+//recalcula os vetores do cluster com o centroide
+
+int recalculateClusters(){
+
+    int changed = 0;
+
+    //testar if para evitar comparação de inteiros
+
+    for(int i = 0; i < K; i++){
+
+        vector comparator = centroidCalculator(cluster_points[i]);
+
+         if(comparator.x != clusters[i].x || comparator.y != clusters[i].y){
+            clusters[i] = centroidCalculator(cluster_points[i]);
+            changed = 1;
+         }
+
+    } 
+
+    return changed;
+}
+
 
 
 int main(){
 
-    // alloc();
-    // init();
+    alloc();
+    init();
+    assignsCluster();
+
+    int changed = 1;
+    int i = 0;
+
+    while(changed){
+
+        changed = recalculateClusters();
+        assignsCluster();
+        printf("ola\n");
+        i++;
+
+    }
+
+    printf("%d",i);
+    
 
 
-
-    llist a = NULL;
-    vector b;
-    b.x = 1;
-    b.y = 2;
-    vector c;
-    c.x = 3;
-    c.y = 4;
-    appendL(&a,b);
-
-    appendL(&a,c);
-
-
-
-   printList(a);
-
-
-   deleteL(&(a));
-
-printf("\n");
-    printList(a);
-
-
-
-
-   
-
+    // for(int i = 0; i < K; i++){
+    //     printList(cluster_points[i]);
+    // }
 
 
 }

@@ -9,15 +9,21 @@ float euclideanDistance(vector a, vector b){
 
 
 
-vector centroidCalculator(vector * points, int size){
+vector centroidCalculator(llist points){
 
     float xSum, ySum;
     xSum = 0;
     ySum = 0;
 
-    for(int i = 0; i < size; i++){
-        xSum += points[i].x;
-        ySum += points[i].y;
+    llist aux = points;
+    int size = 0;
+
+    while(aux){
+        xSum += aux->value.x;
+        ySum += aux->value.y;
+        size++;
+
+        aux = aux -> next;
     }
 
     vector res;
