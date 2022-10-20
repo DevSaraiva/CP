@@ -6,20 +6,19 @@
 #include <stdlib.h>
 
 
-
 typedef struct Vector {       
     float x;
     float y;
 } vector;
 
 
-typedef struct Lligada {
-        vector valor;
-        struct lligada *prox;
-} *lligada;
+typedef struct Llist {
+        vector value;
+        struct llist *next;
+} *llist;
 
 float euclideanDistance(vector a, vector b);
 vector centroidCalculator(vector * points, int size);
-void deleteHead (lligada l);
+void deleteL (llist l,llist prev);
 
 #endif

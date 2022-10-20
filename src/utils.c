@@ -28,9 +28,9 @@ vector centroidCalculator(vector * points, int size){
 }
 
 
-// da free a cabeça e devolve a cauda
-void deleteHead (lligada l){
-    lligada aux = l;
-    l = l->prox;
-    free(aux);
+// da free a cabeca do l e mete o ant->prox a apontar para l->prox
+void deleteL (llist l, llist prev){
+    prev->next = l->next;
+    free(l);
 }
+
