@@ -53,6 +53,35 @@ void assignsCluster () {
     }
 }
 
+
+void reAssignsCluster () {
+    // percorre a lista ligada de cada cluster
+    for(int i = 0; i < K; i++) {
+
+        llist aux = cluster_points[i];
+        while(aux){
+            
+            int id_cluster = 0;
+            float distance_near = euclideanDistance(aux->value,clusters[0]);
+            float distance_aux;
+            for (int j=1; j < K; j++){
+                distance_aux = euclideanDistance(aux->value,clusters[j]);
+                if (distance_aux < distance_near) {
+                    distance_near = distance_aux;
+                    id_cluster = j;
+                }
+            }
+            if (id_cluster != i) {
+                appendL(&cluster_points[id_cluster],aux->value);
+                deleteL(&(aux));
+            }
+
+            aux = aux->next;
+        }
+    
+    }
+}
+
 //recalcula os vetores do cluster com o centroide
 
 int recalculateClusters(){
@@ -89,7 +118,7 @@ int main(){
     while(changed){
 
         changed = recalculateClusters();
-        assignsCluster();
+        reAssignsCluster();
         i++;
         printf("%d\n",i);
       
