@@ -30,7 +30,29 @@ vector centroidCalculator(vector * points, int size){
 
 // da free a cabeca do l e mete o ant->prox a apontar para l->prox
 void deleteL (llist l, llist prev){
-    prev->next = l->next;
-    free(l);
+    if(prev){
+        prev->next = l->next;
+        free(l);
+    }else{
+        llist aux = l;
+        l = l->next;
+        free(aux);
+    }
+    
 }
 
+// adiciona à cabeça da lista
+void appendL(llist * l, vector value){
+    llist aux = (llist) malloc(sizeof(struct Llist));
+    aux->value = value;
+    aux->next = (*l);
+    *l = aux;
+}
+
+
+void printList(llist l){
+    while(l!= NULL){
+        printf("%f %f \n",l->value.x,l->value.y);
+        l = l -> next;
+    }
+}

@@ -14,11 +14,13 @@ typedef struct Vector {
 
 typedef struct Llist {
         vector value;
-        struct llist *next;
+        struct Llist *next;
 } *llist;
 
 float euclideanDistance(vector a, vector b);
 vector centroidCalculator(vector * points, int size);
-void deleteL (llist l,llist prev);
+void deleteL (llist l);
+void appendL(llist *l, vector value);
+void printList(llist l);
 
 #endif
