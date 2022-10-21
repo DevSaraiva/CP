@@ -7,7 +7,7 @@
 
 vector * points;
 vector * clusters;
-llist * cluster_points;
+vector * cluster_points;
 
 void alloc(){
     points = (vector *) malloc(sizeof(vector) * N);
@@ -116,7 +116,7 @@ int recalculateClusters(){
          }
 
 
-       // printf("centroid : %f %f\n",clusters[i].x,clusters[i].y);
+       //printf("centroid : %f %f\n",clusters[i].x,clusters[i].y);
     } 
 
     return changed;
@@ -136,24 +136,21 @@ int main(){
      int changed = 1;
      int i = 0;
 
-     while(changed ){
+     while(changed){
         
         changed = recalculateClusters();    
+
         i++;
         printf("%d\n",i);
-        
+
+
         reAssignsCluster(); 
-
-
-        // for(int i = 0; i < K; i++){
-
-        // printList(cluster_points[i]);
-        // printf("\n\n\n\n\n\n"); 
-           
-        // }
-
-
         
+       
+        
+         
+      
+      
 
     }
 

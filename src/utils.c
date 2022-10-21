@@ -9,21 +9,19 @@ float euclideanDistance(vector a, vector b){
 
 
 
-vector centroidCalculator(llist points){
+vector centroidCalculator(vector * points){
 
     float xSum, ySum;
     xSum = 0;
     ySum = 0;
 
-    llist aux = points;
     int size = 0;
 
-    while(aux){
-        xSum += aux->value.x;
-        ySum += aux->value.y;
+    for(int i = 0; i < N; i++){
+        xSum += points[i].x;
+        ySum += points[i].y;
         size++;
 
-        aux = aux -> next;
     }
 
     vector res;
@@ -35,36 +33,3 @@ vector centroidCalculator(llist points){
 }
 
 
-// da delete a cabeca do l
-void deleteL (llist *l){
-    llist temp = (*l);
-	(*l) = (*l)->next;
-	free(temp);
-}
-
-
-
-// adiciona à cabeça da lista
-void appendL(llist * l, vector value){
-    llist aux = (llist) malloc(sizeof(struct Llist));
-    aux->value = value;
-    aux->next = (*l);
-    *l = aux;
-}
-
-
-void printList(llist l){
-    while(l!= NULL){
-        printf("%f %f \n",l->value.x,l->value.y);
-        l = l -> next;
-    }
-}
-
-size_t listSize(llist l){
-    int i = 0;
-    while(l!= NULL){
-        i++;
-        l = l -> next;
-    }
-    return i;
-}
