@@ -1,7 +1,7 @@
 #include "../include/utils.h"
 
 
-#define N 10
+#define N 10000000
 #define K 4
 
 
@@ -87,7 +87,7 @@ void reAssignsCluster () {
                 appendL(&cluster_points[id_cluster],(*aux)->value);
                 deleteL(aux);  
 
-                printf("moved from %d to %d\n",i,id_cluster);
+                //printf("moved from %d to %d\n",i,id_cluster);
             }else{
                 aux = &((*aux)->next);
             }
@@ -116,7 +116,7 @@ int recalculateClusters(){
          }
 
 
-        printf("centroid : %f %f\n",clusters[i].x,clusters[i].y);
+       // printf("centroid : %f %f\n",clusters[i].x,clusters[i].y);
     } 
 
     return changed;
@@ -131,40 +131,29 @@ int main(){
 
 
 
-    for(int i = 0; i < K; i++ ){
-        printf("%f %f\n",clusters[i].x,clusters[i].y);
-    }
-
-
      assignsCluster();
 
      int changed = 1;
      int i = 0;
 
-     while(changed){
+     while(changed ){
         
         changed = recalculateClusters();    
-
         i++;
         printf("%d\n",i);
-
-
-        for(int i = 0; i < K; i++){
-
-        printList(cluster_points[i]);
-        printf("\n\n\n\n\n\n"); 
-           
-        }
-
-
+        
         reAssignsCluster(); 
+
+
+        // for(int i = 0; i < K; i++){
+
+        // printList(cluster_points[i]);
+        // printf("\n\n\n\n\n\n"); 
+           
+        // }
+
+
         
-        sleep(2);
-       
-        
-         
-      
-      
 
     }
 

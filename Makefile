@@ -3,7 +3,7 @@ BIN = bin/
 SRC = src/
 INCLUDES = include/
 EXEC = k_means
-CFLAGS = -O2
+CFLAGS = -O3
 
 .DEFAULT_GOAL = k_means
 
