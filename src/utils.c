@@ -41,6 +41,8 @@ void deleteL (llist *l){
 	free(temp);
 }
 
+
+
 // adiciona à cabeça da lista
 void appendL(llist * l, vector value){
     llist aux = (llist) malloc(sizeof(struct Llist));

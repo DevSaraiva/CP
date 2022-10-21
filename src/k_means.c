@@ -13,6 +13,11 @@ void alloc(){
     points = (vector *) malloc(sizeof(vector) * N);
     clusters = (vector *) malloc(sizeof(vector) * K);
     cluster_points = (llist *) malloc(sizeof(struct Llist) * K);
+
+
+    for(int i = 0; i < K; i++){
+        cluster_points[i] = NULL;
+    }
 }
 
 
@@ -58,25 +63,30 @@ void reAssignsCluster () {
     // percorre a lista ligada de cada cluster
     for(int i = 0; i < K; i++) {
 
-        llist aux = cluster_points[i];
-        while(aux){
+        
+        llist *aux = &cluster_points[i];
+
+        while(*aux){
             
+    
             int id_cluster = 0;
-            float distance_near = euclideanDistance(aux->value,clusters[0]);
+            float distance_near = euclideanDistance((*aux)->value,clusters[0]);
             float distance_aux;
             for (int j=1; j < K; j++){
-                distance_aux = euclideanDistance(aux->value,clusters[j]);
+                distance_aux = euclideanDistance((*aux)->value,clusters[j]);
                 if (distance_aux < distance_near) {
                     distance_near = distance_aux;
                     id_cluster = j;
                 }
             }
             if (id_cluster != i) {
-                appendL(&cluster_points[id_cluster],aux->value);
-                deleteL(&(aux));
+                appendL(&cluster_points[id_cluster],(*aux)->value);
+                deleteL(aux);
+            }else{
+                aux = &((*aux)->next);
             }
 
-            aux = aux->next;
+        
         }
     
     }
@@ -108,30 +118,68 @@ int recalculateClusters(){
 
 int main(){
 
-    alloc();
-    init();
-    assignsCluster();
+     alloc();
+     init();
+     assignsCluster();
 
-    int changed = 1;
-    int i = 0;
+     int changed = 1;
+     int i = 0;
 
-    while(changed){
+     while(changed){
 
-        changed = recalculateClusters();
-        reAssignsCluster();
-        i++;
-        printf("%d\n",i);
+         changed = recalculateClusters();
+         reAssignsCluster();
+         i++;
+         printf("%d\n",i);
       
 
     }
 
 
+    // llist * lista = malloc(sizeof(struct Llist));
+    // *lista = NULL;
+
+    // vector a;
+    // a.x = 1;
+    // a.y = 2;
+
+    // vector c;
+    // c.x = 3;
+    // c.y = 4;
+
+
+    // vector d;
+    // d.x = 5;
+    // d.y = 6;
+
+
+    // vector e;
+    // e.x = 7;
+    // e.y = 8;
+
+    // appendL(lista,a);
+    // appendL(lista,c);
+    // appendL(lista,d);
+    // appendL(lista,e);
+
+
+    // while(*lista){
+        
+
+    //      deleteL(lista);
+
+    //      //lista = &((*lista)->next);
+
+    //      printList(*lista);
+
+    //      printf("\n\n");
+    // }
+
+
     
     return 1;
 
-    // for(int i = 0; i < K; i++){
-    //     printList(cluster_points[i]);
-    // }
+  
 
 
 }
