@@ -1,7 +1,7 @@
 #include "../include/utils.h"
 
 
-#define N 10000000
+#define N 10
 #define K 4
 
 
@@ -39,6 +39,9 @@ void init(){
 }
 
 void assignsCluster () {
+    
+
+        
     for(int i = 0; i < N; i++) {
 
         int id_cluster = 0;
@@ -55,6 +58,7 @@ void assignsCluster () {
         // aqui temos o indice do cluster mais proximo do ponto
 
         appendL(&cluster_points[id_cluster],points[i]);
+
     }
 }
 
@@ -68,7 +72,7 @@ void reAssignsCluster () {
 
         while(*aux){
             
-    
+        
             int id_cluster = 0;
             float distance_near = euclideanDistance((*aux)->value,clusters[0]);
             float distance_aux;
@@ -81,7 +85,9 @@ void reAssignsCluster () {
             }
             if (id_cluster != i) {
                 appendL(&cluster_points[id_cluster],(*aux)->value);
-                deleteL(aux);
+                deleteL(aux);  
+
+                printf("moved from %d to %d\n",i,id_cluster);
             }else{
                 aux = &((*aux)->next);
             }
@@ -104,11 +110,13 @@ int recalculateClusters(){
 
         vector comparator = centroidCalculator(cluster_points[i]);
 
-         if(comparator.x != clusters[i].x || comparator.y != clusters[i].y){
-            clusters[i] = centroidCalculator(cluster_points[i]);
+        if(comparator.x != clusters[i].x || comparator.y != clusters[i].y){
+            clusters[i] = comparator;
             changed = 1;
          }
 
+
+        printf("centroid : %f %f\n",clusters[i].x,clusters[i].y);
     } 
 
     return changed;
@@ -120,20 +128,56 @@ int main(){
 
      alloc();
      init();
+
+
+
+    for(int i = 0; i < K; i++ ){
+        printf("%f %f\n",clusters[i].x,clusters[i].y);
+    }
+
+
      assignsCluster();
 
      int changed = 1;
      int i = 0;
 
      while(changed){
+        
+        changed = recalculateClusters();    
 
-         changed = recalculateClusters();
-         reAssignsCluster();
-         i++;
-         printf("%d\n",i);
+        i++;
+        printf("%d\n",i);
+
+
+        for(int i = 0; i < K; i++){
+
+        printList(cluster_points[i]);
+        printf("\n\n\n\n\n\n"); 
+           
+        }
+
+
+        reAssignsCluster(); 
+        
+        sleep(2);
+       
+        
+         
+      
       
 
     }
+
+
+    printf("N = %d, K = %d\n",N ,K);
+    
+    for(int i = 0; i < K; i++){
+        printf("Center: (%f,%f) : Size: %ld\n",clusters[i].x,clusters[i].y,listSize(cluster_points[i]));
+    }
+    printf("Iterations: %d\n",i);
+
+
+
 
 
     // llist * lista = malloc(sizeof(struct Llist));
@@ -163,6 +207,10 @@ int main(){
     // appendL(lista,e);
 
 
+    // vector res = centroidCalculator(*lista);
+
+    // printf("%f %f\n",res.x,res.y);
+
     // while(*lista){
         
 
@@ -175,6 +223,13 @@ int main(){
     //      printf("\n\n");
     // }
 
+
+// N = 10000000, K = 4
+// Center: (0.250, 0.750) : Size: 2499108
+// Center: (0.250, 0.250) : Size: 2501256
+// Center: (0.750, 0.250) : Size: 2499824
+// Center: (0.750, 0.750) : Size: 2499812
+// Iterations: 39
 
     
     return 1;

@@ -27,6 +27,7 @@ vector centroidCalculator(llist points){
     }
 
     vector res;
+
     res.x =  xSum / size;
     res.y = ySum / size;
 
@@ -57,4 +58,13 @@ void printList(llist l){
         printf("%f %f \n",l->value.x,l->value.y);
         l = l -> next;
     }
+}
+
+size_t listSize(llist l){
+    int i = 0;
+    while(l!= NULL){
+        i++;
+        l = l -> next;
+    }
+    return i;
 }
