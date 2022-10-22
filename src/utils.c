@@ -10,10 +10,6 @@ float euclideanDistance(vector a, vector b){
 
 
 
-
-
-
-
 vector centroidCalculator(cluster cluster){
 
     float xSum, ySum;
