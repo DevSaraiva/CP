@@ -17,11 +17,38 @@ vector centroidCalculator(cluster cluster){
     ySum = 0.0f;
 
     int size = 0;
+    int i = 0;
 
-    for(int i = 0; i < cluster.actual_size; i++){
+    for(i; i < cluster.actual_size - 4; i = i + 5){
         
         xSum += cluster.points[i].x;
         ySum += cluster.points[i].y;
+        size++;
+
+
+        xSum += cluster.points[i + 1].x;
+        ySum += cluster.points[i + 1].y;
+        size++;
+
+        xSum += cluster.points[i + 2].x;
+        ySum += cluster.points[i + 2].y;
+        size++;
+
+
+        xSum += cluster.points[i + 3].x;
+        ySum += cluster.points[i + 3].y;
+        size++;
+
+
+        xSum += cluster.points[i + 4].x;
+        ySum += cluster.points[i + 4].y;
+        size++;
+
+    }
+
+    for(i; i < cluster.actual_size; i++){
+        xSum += cluster.points[i + 4].x;
+        ySum += cluster.points[i + 4].y;
         size++;
 
     }
