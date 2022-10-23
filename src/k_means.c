@@ -34,7 +34,91 @@ void init(){
 
 void assignsCluster () {
     
-    for(int i = 0; i < N; i++) {
+    int i = 0;
+    for(i; i < N - 4; i = i + 5) {
+
+        //loop unrolling
+
+        int id_cluster = 0;
+        float distance_near = euclideanDistance(points[i],clusters[0].centroid);
+        float distance_aux;
+        for (int j=1; j < K; j++){
+            distance_aux = euclideanDistance(points[i],clusters[j].centroid);
+            if (distance_aux < distance_near) {
+                distance_near = distance_aux;
+                id_cluster = j;
+            }
+        }
+
+        // aqui temos o indice do cluster mais proximo do ponto
+
+        add_cluster(points[i],&clusters[id_cluster]);
+
+        id_cluster = 0;
+        distance_near = euclideanDistance(points[i + 1],clusters[0].centroid);
+        for (int j=1; j < K; j++){
+            distance_aux = euclideanDistance(points[i + 1],clusters[j].centroid);
+            if (distance_aux < distance_near) {
+                distance_near = distance_aux;
+                id_cluster = j;
+            }
+        }
+
+        // aqui temos o indice do cluster mais proximo do ponto
+
+        add_cluster(points[i + 1],&clusters[id_cluster]);
+
+
+        id_cluster = 0;
+        distance_near = euclideanDistance(points[i + 2],clusters[0].centroid);
+        for (int j=1; j < K; j++){
+            distance_aux = euclideanDistance(points[i + 2],clusters[j].centroid);
+            if (distance_aux < distance_near) {
+                distance_near = distance_aux;
+                id_cluster = j;
+            }
+        }
+
+        // aqui temos o indice do cluster mais proximo do ponto
+
+        add_cluster(points[i + 2],&clusters[id_cluster]);
+
+
+
+        id_cluster = 0;
+        distance_near = euclideanDistance(points[i + 3],clusters[0].centroid);
+        for (int j=1; j < K; j++){
+            distance_aux = euclideanDistance(points[i + 3],clusters[j].centroid);
+            if (distance_aux < distance_near) {
+                distance_near = distance_aux;
+                id_cluster = j;
+            }
+        }
+
+        // aqui temos o indice do cluster mais proximo do ponto
+
+        add_cluster(points[i + 3],&clusters[id_cluster]);
+
+
+
+
+        id_cluster = 0;
+        distance_near = euclideanDistance(points[i + 4],clusters[0].centroid);
+        for (int j=1; j < K; j++){
+            distance_aux = euclideanDistance(points[i + 4],clusters[j].centroid);
+            if (distance_aux < distance_near) {
+                distance_near = distance_aux;
+                id_cluster = j;
+            }
+        }
+
+        // aqui temos o indice do cluster mais proximo do ponto
+
+        add_cluster(points[i + 4],&clusters[id_cluster]);
+
+    }
+
+    for(i; i<N;i++){
 
         int id_cluster = 0;
         float distance_near = euclideanDistance(points[i],clusters[0].centroid);
@@ -52,6 +136,8 @@ void assignsCluster () {
         add_cluster(points[i],&clusters[id_cluster]);
 
     }
+
+  
 }
 
 

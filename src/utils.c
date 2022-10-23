@@ -16,7 +16,7 @@ vector centroidCalculator(cluster cluster){
     xSum = 0.0f;
     ySum = 0.0f;
 
-    float size = 0.0f;
+    int size = 0;
 
     for(int i = 0; i < cluster.actual_size; i++){
         
@@ -45,7 +45,6 @@ void add_cluster(vector v, cluster * c){
     }
 
 
-   
 
     c->points[c->actual_size] = v;
     c->actual_size = c->actual_size + 1;
