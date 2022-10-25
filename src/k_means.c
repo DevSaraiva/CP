@@ -1,8 +1,6 @@
 #include "../include/utils.h"
 
 
-
-
 void init(vector * points, cluster * clusters){
 
     srand(10);
