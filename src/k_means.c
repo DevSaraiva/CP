@@ -2,8 +2,20 @@
 
 
 
+vector * points;
+cluster * clusters;
 
-void init(vector * points, cluster * clusters){
+
+void alloc(){
+
+    points = (vector *) malloc(sizeof(vector) * N);
+    clusters = (cluster *) malloc(sizeof(cluster) * K);
+
+    allocClusterPoints(clusters);
+    
+}
+
+void init(){
 
     srand(10);
     
@@ -20,7 +32,7 @@ void init(vector * points, cluster * clusters){
 
 }
 
-void assignsCluster (vector * points, cluster * clusters) {
+void assignsCluster () {
     
     for(int i = 0; i < N; i++) {
 
@@ -35,13 +47,9 @@ void assignsCluster (vector * points, cluster * clusters) {
             }
         }
 
-        if(clusters[id_cluster].max_size == clusters[id_cluster].actual_size){
-            clusters[id_cluster].max_size = 1.2 * clusters[id_cluster].max_size;
-            clusters[id_cluster].points = realloc(clusters[id_cluster].points,sizeof(vector) * clusters[id_cluster].max_size);
-        }
+        // aqui temos o indice do cluster mais proximo do ponto
 
-        clusters[id_cluster].points[clusters[id_cluster].actual_size] = points[i];
-        clusters[id_cluster].actual_size =  clusters[id_cluster].actual_size + 1;
+        add_cluster(points[i],&clusters[id_cluster]);
 
     }
 }
@@ -49,7 +57,7 @@ void assignsCluster (vector * points, cluster * clusters) {
 
 //recalcula os vetores do cluster com o centroide
 
-int recalculateClusters(cluster * clusters){
+int recalculateClusters(){
 
     int changed = 0;
 
@@ -74,46 +82,25 @@ int recalculateClusters(cluster * clusters){
 
 int main(){
 
-    vector * points;
-    cluster * clusters;
-
-
-    //alloc
-
-    points = (vector *) malloc(sizeof(vector) * N);
-    clusters = (cluster *) malloc(sizeof(cluster) * K);
-
-    for(int i = 0; i < K; i++){
-        clusters[i].max_size = N/K;
-        clusters[i].actual_size = 0;
-        clusters[i].points = malloc(sizeof(vector)*clusters[i].max_size);
-
-    }
-    
-    //init
-
-    init(points,clusters);
-
-
-    //------------------------------------------------------------------------------------------------------------------
-
-
-    assignsCluster(points, clusters);
+    alloc();
+    init();
+    assignsCluster();
 
     int i = 0;
 
 
-    int changed = recalculateClusters(clusters);  
+    int changed = recalculateClusters();  
        
-    while(changed){
+     while(changed){
         
-        resetClustersSize(clusters);
-        assignsCluster(points, clusters);
+        allocClusterPoints(clusters);
+        assignsCluster();
 
         i++;
-        changed = recalculateClusters(clusters);
+        changed = recalculateClusters();
 
     }
+
 
         printf("N = %d, K = %d\n",N ,K);
     
@@ -122,6 +109,12 @@ int main(){
         }
         printf("Iterations: %d\n",i);
 
+
+
+    
     return 1;
+
+  
+
 
 }
