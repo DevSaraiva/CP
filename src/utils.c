@@ -1,55 +1,41 @@
 #include "../include/utils.h"
-#include <math.h>
 
-float euclideanDistance(vector a, vector b){
 
-    float dx = b.x - a.x;
-    float dy = b.y - a.y;
+
+
+
+float euclideanDistance(float x, float y, float x1 , float y1){
+
+    float dx =  x1 - x;
+    float dy = y1 - y;
     return ((dx*dx) + (dy*dy));
 }
 
-
-
+/*
 vector centroidCalculator(cluster cluster){
-
-    float xSum, ySum;
-    xSum = 0.0f;
-    ySum = 0.0f;
-
-    for(int i = 0; i < cluster.actual_size; i++){
-        
-        xSum += cluster.points[i].x;
-        ySum += cluster.points[i].y;
-
-    }
 
     vector res;
 
-    res.x =  xSum / cluster.actual_size;
-    res.y = ySum / cluster.actual_size;
+    res.x =  cluster.xSum / cluster.actual_size;
+    res.y =  cluster.ySum / cluster.actual_size;
 
     return res;
 }
+*/
 
-
-void freeClusterPoints(cluster * clusters){
-
-    for(int i = 0; i < K; i++){
-        free(clusters[i].points); 
-    }
-}
-
-
-void resetClustersSize(cluster * clusters){
+void resetClustersSize(int * actual_size,float * sum_cluster){
     
-    for(int i = 0; i < K; i++){
-        clusters[i].actual_size =  0;
+    for(int i = 0; i < 2*K; i= i +2){
+        
+        actual_size[i/2]= 0;
+        sum_cluster[i] = 0;
+        sum_cluster[i+1] = 0;
+
     }
     
 }
 
-
-
+/*
 void printPoints(vector * points){
     
     for(int i = 0; i < N; i++){
@@ -59,3 +45,4 @@ void printPoints(vector * points){
 
     }
 }
+*/
