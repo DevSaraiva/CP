@@ -5,8 +5,8 @@
 
 
 
-#define N 10000000
-#define K 4
+int N;
+int K;
 
 
 void init(float * points, float * centroid_cluster){
@@ -103,7 +103,10 @@ int recalculateClusters(int * actual_size, float * sum_cluster, float * centroid
 
 
 
-int main(){
+int main(int argc, char ** argv){
+
+    N = atoi(argv[1]);
+    K = atoi(argv[2]);
 
     float * points;
     int * actual_size;
@@ -141,7 +144,7 @@ int main(){
 
     int it = 0;
        
-    while(changed){        
+    while(changed && it < 20){        
         for(int i = 0; i < 2*K; i= i +2){
         
         actual_size[i/2]= 0;
