@@ -2,7 +2,7 @@ CC = gcc
 BIN = bin/
 SRC = src/
 EXEC = k_means
-CFLAGS = -O2
+CFLAGS = -O2 -fopenmp
 THREADS = 2
 CP_CLUSTERS = 4
 
