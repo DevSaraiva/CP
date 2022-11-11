@@ -11,10 +11,7 @@ int N;
 int K;
 int N_THREADS;
 
-
-
 void init(point * points, cluster * clusters){
-
     srand(10);
     
     for(int i = 0; i < N; i++) {
