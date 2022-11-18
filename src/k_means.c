@@ -5,8 +5,6 @@
 #include <unistd.h>
 #include "../include/utils.h"
 
-
-
 int N;
 int K;
 int N_THREADS;
@@ -15,7 +13,6 @@ void init(point * points, cluster * clusters){
     srand(10);
     
     for(int i = 0; i < N; i++) {
-        
         points[i].x = (float) rand() / RAND_MAX;
         points[i].y = (float) rand() / RAND_MAX;
     }
@@ -43,7 +40,7 @@ int assignsCluster (point * points, cluster * clusters, int *points_cluster) {
         actual_size_private[i] = 0;
     }
 
-    #pragma omp for
+    #pragma omp for 
     for(int i = 0; i <  N; i++) {
 
         int id_cluster = 0;
@@ -132,7 +129,9 @@ int main(int argc, char ** argv){
     init(points, clusters);
 
     //------------------------------------------------------------------------------------------------------------------
+    if(argc == 3){
 
+    }
     int changed = assignsCluster(points, clusters,points_cluster);
 
 
@@ -159,6 +158,6 @@ int main(int argc, char ** argv){
         printf("Iterations: %d\n",it);
 
       
-    return 1;
+    return 0;
 
 }
